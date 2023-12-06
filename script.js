@@ -2,10 +2,11 @@ let button = document.getElementById("btn")
 let userinput = document.getElementById("UserInput")
 let container = document.getElementById("containier")
 let error = document.getElementById("error")
-console.log(error)
+let content="";
 
-button.addEventListener("click",async ()=>{
+button.addEventListener("click",async ()=> {
     let userName = userinput.value
+    // console.log(userName)
     try {
 
     let response = await fetch(`https://api.github.com/users/${userName}/repos`)
@@ -14,6 +15,7 @@ button.addEventListener("click",async ()=>{
         display_card(data)
     }
     else{
+        
         error.innerHTML="enter valid user name"
         throw new Error("invalid user name")
     }
@@ -27,6 +29,8 @@ button.addEventListener("click",async ()=>{
 
 let display_card = (data) =>{
     error.innerHTML=""
+    container.innerHTML=""
+    
     data.map((Element)=>{
         container.innerHTML+=`<div class="card m-3 bg-primary">
         <div class="card-header">
